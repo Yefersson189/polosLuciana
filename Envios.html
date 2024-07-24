@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css"> 
+    <title>Polos Luciana</title>
+    
+  </head>
+
+  <body>
+    <div class="head"> 
+
+        <div class="Logo">
+            <a href=""></a>
+            <img src="imagenes/logo.jpg" alt="" height="73px" width="75px">
+         </div>
+      
+       <nav class="navbar"> 
+          <a href="index.html">Inicio</a>
+          <a href="Iniciasesion.html">Inicia sesion</a>
+          <a href="Productos.html">Productos</a>
+          <a href="Envios.html">Envios</a>
+          <a href="Metodosdepago.html">Metodo de pago</a>
+        </nav>
+ 
+     </div>
+        <div class="formulario">
+            <h1>Datos De Envio</h1>
+            <form method="post">
+              <div class="username">
+                <input type="text" id="username" required>
+                <label>Nombre de usuario</label>
+              </div>
+              <div class="username">
+                <input type="number"id="cedula" required>
+                <label>Cedula</label>
+              </div>
+              <div class="username">
+                <input type="text"id="ciudad" required>
+                <label>Ciudad</label>
+              </div>
+              <div class="username">
+                <input type="text"id="direccion" required>
+                <label>Direccion</label>
+              </div>
+              <div class="username">
+                <input type="number"id="telefono" required>
+                <label>Telefono</label>
+              </div>
+              <div class="btn-home 1">
+                <button type="button" onclick="validateForm()" class="btn">Enviar</button>
+             </div>
+       </form>
+              
+        <script>
+          function validateForm() {
+            var username = document.getElementById("username").value;
+            var cedula = document.getElementById("cedula").value;
+            var ciudad = document.getElementById("ciudad").value;
+            var direccion = document.getElementById("direccion").value;
+            var telefono = document.getElementById("telefono").value;
+        
+        
+          // Verificar si los campos están vacíos
+          if (username.trim() === '' || cedula.trim() === '' || ciudad.trim() === '' || direccion.trim() === ''|| telefono.trim() === '') {
+            alert('Por favor, complete todos los campos.');
+            return false; // Evitar que el formulario se envíe
+          }
+          else{
+              location.replace("factura.html")
+             }
+          }
+        </script>
+
+  </body>
+</html>

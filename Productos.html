@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css"> 
+    <title>Polos Luciana</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+  <body>
+    <div class="head"> 
+      <div class="Logo">
+          <a href=""></a>
+          <img src="imagenes/logo.jpg" alt="" height="73px" width="75px">
+       </div>
+       <nav class="navbar"> 
+          <a href="Productos.html">Productos</a>
+          
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              // Variables
+              const baseDeDatos = [
+                  {
+                      id: 1,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen: 'imagenes/producto1.png'
+                  },
+                  {
+                      id: 2,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen: 'imagenes/producto2.png'
+                  },
+                  {
+                      id: 3,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen: 'imagenes/producto3.png'
+                  },
+                  {
+                      id: 4,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen: 'imagenes/producto4.png'
+                  },
+                  {
+                      id: 5,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen:'imagenes/producto5.png'
+                  },
+                  {
+                      id: 6,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen: 'imagenes/producto6.png'
+                  },
+                  {
+                      id: 7,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen: 'imagenes/producto7.png'
+                  },
+                  {
+                      id: 8,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen: 'imagenes/producto8.png'
+                  },
+                  {
+                      id: 9,
+                      nombre: 'Tipo Polo',
+                      precio: 50.000,
+                      imagen: 'imagenes/producto9.png'
+                  },
+              ];
+    
+              let carrito = [];
+              const divisa = '$';
+              const DOMitems = document.querySelector('#items');
+              const DOMcarrito = document.querySelector('#carrito');
+              const DOMtotal = document.querySelector('#total');
+              const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+    
+              // Funciones
+    
+              /**
+              * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+              */
+              function renderizarProductos() {
+                  baseDeDatos.forEach((info) => {
+                      // Estructura
+                      const miNodo = document.createElement('div');
+                      miNodo.classList.add('card', 'col-sm-4');
+                      // Obtén todas las tarjetas que contienen los productos
+                          const cards = document.querySelectorAll('.card');
+
+                          // Itera sobre cada tarjeta y agrega margen inferior
+                          cards.forEach(card => {
+                              card.style.marginBottom = '5px'; // Puedes ajustar el valor según sea necesario
+                              cards.forEach(card => {
+                              card.style.marginLeft = '10px'; // Márgen izquierdo
+                              card.style.marginRight = '10px'; // Márgen derecho
+                              card.style.backgroundColor = '#3F51B5'; 
+                          });
+                          });
+                      // Body
+                      const miNodoCardBody = document.createElement('div');
+                      miNodoCardBody.classList.add('card-body');
+                      // Titulo
+                      const miNodoTitle = document.createElement('h5');
+                      miNodoTitle.classList.add('card-title');
+                      miNodoTitle.textContent = info.nombre;
+                      const titulos = document.querySelectorAll('.card-title');
+
+                        // Itera sobre cada título y aplica estilos para centrarlo horizontalmente
+                        titulos.forEach(titulo => {
+                            titulo.style.textAlign = 'center'; // Centra el texto horizontalmente
+                        });
+
+                      // Imagen
+                      const miNodoImagen = document.createElement('img');
+                      miNodoImagen.classList.add('imagenes/');
+                      miNodoImagen.setAttribute('src', info.imagen);
+                      // Obtener todas las imágenes
+                              const imagenes = document.querySelectorAll('.card-body img');
+
+                              // Iterar sobre cada imagen y cambiar su tamaño
+                              imagenes.forEach(imagen => {
+                                  imagen.style.width = '155px'; // Establecer el ancho deseado
+                                  imagen.style.height = 'auto'; // Mantener la proporción
+                                  imagen.style.display = 'block'; // Para poder centrarlas horizontalmente
+                                      imagen.style.marginLeft = 'auto';
+                                      imagen.style.marginRight = 'auto';
+                                });
+                                
+                      // Precio
+                      const miNodoPrecio = document.createElement('p');
+                      miNodoPrecio.classList.add('card-text');
+                      miNodoPrecio.textContent = `${info.precio}${divisa}`;
+                      const precioFormateado = info.precio.toFixed(3);
+                              miNodoPrecio.textContent = `${precioFormateado}${divisa}`;
+                      
+                      // Boton
+                      const miNodoBoton = document.createElement('button');
+                      miNodoBoton.classList.add('btn', 'btn-primary');
+                      miNodoBoton.textContent = '+';
+                      miNodoBoton.setAttribute('marcador', info.id);
+                      miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                      // Insertamos
+                      miNodoCardBody.appendChild(miNodoImagen);
+                      miNodoCardBody.appendChild(miNodoTitle);
+                      miNodoCardBody.appendChild(miNodoPrecio);
+                      miNodoCardBody.appendChild(miNodoBoton);
+                      miNodo.appendChild(miNodoCardBody);
+                      DOMitems.appendChild(miNodo);
+                  });
+              }
+    
+              /**
+              * Evento para añadir un producto al carrito de la compra
+              */
+              function anyadirProductoAlCarrito(evento) {
+                  // Anyadimos el Nodo a nuestro carrito
+                  carrito.push(evento.target.getAttribute('marcador'))
+                  // Actualizamos el carrito
+                  renderizarCarrito();
+    
+              }
+    
+              /**
+              * Dibuja todos los productos guardados en el carrito
+              */
+              function renderizarCarrito() {
+                  // Vaciamos todo el html
+                  DOMcarrito.textContent = '';
+                  // Quitamos los duplicados
+                  const carritoSinDuplicados = [...new Set(carrito)];
+                  // Generamos los Nodos a partir de carrito
+                  carritoSinDuplicados.forEach((item) => {
+                      // Obtenemos el item que necesitamos de la variable base de datos
+                      const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                          // ¿Coincide las id? Solo puede existir un caso
+                          return itemBaseDatos.id === parseInt(item);
+                      });
+                      // Cuenta el número de veces que se repite el producto
+                      const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                          // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                          return itemId === item ? total += 1 : total;
+                      }, 0);
+                      // Creamos el nodo del item del carrito
+                      const miNodo = document.createElement('li');
+                      miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                      miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+                      // Boton de borrar
+                      const miBoton = document.createElement('button');
+                      miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                      miBoton.textContent = 'X';
+                      miBoton.style.marginLeft = '1rem';
+                      miBoton.dataset.item = item;
+                      miBoton.addEventListener('click', borrarItemCarrito);
+                      // Mezclamos nodos
+                      miNodo.appendChild(miBoton);
+                      DOMcarrito.appendChild(miNodo);
+                  });
+                 // Renderizamos el precio total en el HTML
+                 DOMtotal.textContent = calcularTotal();
+              }
+    
+              /**
+              * Evento para borrar un elemento del carrito
+              */
+              function borrarItemCarrito(evento) {
+                  // Obtenemos el producto ID que hay en el boton pulsado
+                  const id = evento.target.dataset.item;
+                  // Borramos todos los productos
+                  carrito = carrito.filter((carritoId) => {
+                      return carritoId !== id;
+                  });
+                  // volvemos a renderizar
+                  renderizarCarrito();
+              }
+    
+              /**
+               * Calcula el precio total teniendo en cuenta los productos repetidos
+               */
+              function calcularTotal() {
+                  // Recorremos el array del carrito
+                  return carrito.reduce((total, item) => {
+                      // De cada elemento obtenemos su precio
+                      const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                          return itemBaseDatos.id === parseInt(item);
+                      });
+                      // Los sumamos al total
+                      return total + miItem[0].precio;
+                  }, 0).toFixed(3);
+              }
+    
+              /**
+              * Varia el carrito y vuelve a dibujarlo
+              */
+              function vaciarCarrito() {
+                  // Limpiamos los productos guardados
+                  carrito = [];
+                  // Renderizamos los cambios
+                  renderizarCarrito();
+              }
+    
+              // Eventos
+              DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+    
+              // Inicio
+              renderizarProductos();
+              renderizarCarrito();
+            });
+            document.addEventListener('DOMContentLoaded', () => {
+            
+    // Variables y funciones existentes
+
+    // Evento para generar la factura
+    const botonFactura = document.getElementById('boton-factura');
+    botonFactura.addEventListener('click', generarFactura);
+
+    // Función para generar la factura
+    function generarFactura() {
+        // Verificar si el carrito está vacío
+        if (carrito.length === 0) {
+            alert("El carrito está vacío. Por favor, seleccione al menos un producto.");
+            return;
+        }
+
+        // Guardar los detalles de los productos seleccionados en el almacenamiento local
+        localStorage.setItem('productosSeleccionados', JSON.stringify(carrito));
+
+        // Redireccionar a la página de factura
+        window.location.href = 'factura.html';
+    }
+
+});
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <!-- Elementos generados a partir del JSON -->
+                <main id="items" class="col-sm-8 row"></main>
+                <!-- Carrito -->
+                <aside class="col-sm-4">
+                    <h2>Carrito</h2>
+                    <!-- Elementos del carrito -->
+                    <ul id="carrito" class="list-group"></ul>
+                    <hr>
+                    <!-- Precio total -->
+                    <p class="text-right">Total: <span id="total"></span>$;</p>
+                    <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                    <button id="boton-Comprar" class="btn btn-danger"><a href="factura.html">Factura</a></button>
+                    <button id="boton-Comprar" class="btn btn-danger"><a href="Metodosdepago.html">Comprar</a></button>
+
+                </aside>
+            </div>
+        </div>
+          
+    </body>
+    </html>

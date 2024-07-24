@@ -1,0 +1,260 @@
+/* Resetting default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color:rgb(26, 6, 105);
+}
+
+/* Header styles */
+.head {
+    background-color: #0f4c96;
+    color: #aeb8ee;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Logo img {
+    vertical-align: middle;
+}
+
+.navbar a {
+    color: #87c3dc;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+
+/* Header content styles */
+.content {
+    text-align: center;
+    padding: 5pxpx 20px;
+}
+
+.title {
+    margin-bottom: 5px;
+    font-size: 60px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgb(26, 6, 105);
+}
+
+p {
+    margin-bottom: 40px;
+    font-size: 30px;
+    color: aqua;
+}
+
+.btn-home .btn {
+    display: inline-block;
+    background-color: #051961;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-home .btn:hover {
+    background-color: #3679cb;
+}
+
+/* Image styles */
+
+.imagenes-container {
+    position: center;
+}
+.imagenes img {
+    width: 100%;
+    height: 1600px;
+    display: block;
+    margin: 0 auto 20px; /* Center the image and add some bottom margin */
+}
+.text-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    padding: 80px;
+    background-color: rgba(0, 0, 0, 0.5); /* Añade un fondo semitransparente para que el texto sea legible */
+    max-width: 80%; /* Limita el ancho del texto para que no se extienda más allá de la imagen */
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+    .head {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar {
+        margin-top: 10px;
+    }
+
+    .navbar a {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .Logo img {
+        margin-bottom: 10px;
+    }
+}
+/* Estilos para el formulario */
+.formulario {
+    max-width: 500px;
+    margin: 50px auto;
+    background-color:#196aacc0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(15, 9, 124, 0.816);
+    text-align: center;
+}
+
+.formulario h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para los campos de entrada */
+.username,
+.password {
+    margin-bottom: 20px;
+}
+
+.username input,
+.password input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #196aacc0;
+    border-radius: 4px;
+}
+
+.username label,
+.password label {
+    display: block;
+    margin-bottom: 5px;
+
+}
+
+/* Estilos para el enlace de registro */
+.registrarse {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.registrarse a {
+    color: #007bff;
+    text-decoration: none;
+}
+/* Estilos generales */
+#envoltura {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 5px;
+    background-color: #196aacc0;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.col-xs-5 {
+    flex: 0 0 45%;
+}
+
+/* Estilos para las imágenes de las tarjetas */
+#Tarjetas img,
+#tarjetas img {
+    width: px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los checkbox */
+.form-check {
+    margin-bottom: 10px;
+}
+
+/* Estilos para los iconos */
+.row i {
+    margin-right: 10px;
+}
+
+/* Estilos para los campos de entrada */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* Estilos para el botón de enviar */
+.btn-home-2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-home-2 .btn {
+    background-color: #1c1c97;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-home-2 .btn:hover {
+    background-color: #145ed3;
+}
+/* Estructura de los productos */
+.card {
+    background-color: #136c80; /* Cambia el color de fondo de la tarjeta */
+    border-radius: 10px; /* Añade bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra */
+    margin-bottom: 20px; /* Añade espacio entre tarjetas */
+  }
+  
+  /* Título del producto */
+  .card-title {
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  
+  /* Imagen del producto */
+  .card-body img {
+    width: 100%; /* Establece el ancho al 100% */
+    height: auto; /* Mantiene la proporción */
+    display: block; /* Para centrar la imagen horizontalmente */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
+  
+  /* Precio del producto */
+  .card-text {
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  
+  /* Botón de añadir al carrito */
+  .btn-primary {
+    display: block; /* Para centrar el botón horizontalmente */
+    margin: 0 auto; /* Centra el botón horizontalmente */
+  }
+  .custom-paragraph {
+    font-size: 35px;
+    /* Otros estilos personalizados */
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Factura</title>
+    <style>
+        /* Estilos personalizados para la factura */
+        body {
+            background-color: #0e8dbc;
+            font-family: Arial, sans-serif;
+        }
+
+        .container-fluid {
+            background-color: rgb(12, 119, 152);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(4, 8, 115, 0.607);
+        }
+
+        h1 {
+            color: #09176e;
+        }
+
+        h2 {
+            color: #0b0b7a;
+        }
+
+        th {
+            background-color: #061967;
+            color: #0c8b85;
+        }
+
+        td {
+            background-color: #0e4397;
+            color: #0c8b85;
+        }
+
+        tfoot tr:last-child td {
+            background-color:  #0e4397;
+            color: #0c8b85;
+            font-weight: bold;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .img-responsive {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-10 ">
+                <h1>Factura</h1>
+            </div>
+            <div class="col-xs-2">
+                <img class="img img-responsive" src="imagenes/logo.jpg" alt="Logotipo">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-10">
+                <h1 class="h6 custom-heading" style="font-size: 32px;">Polos Luciana</h1>
+            </div>
+            <div class="col-xs-2 text-center">
+                <strong>Fecha</strong>
+                <br>
+                <span id="fechaActual"></span>
+                <br>
+                <strong>Factura No.</strong>
+                <br>
+                <span>1</span>
+            </div>
+            
+        </div>
+        <hr>
+        <div class="row text-center" style="margin-bottom: 2rem;">
+            <div class="col-xs-6">
+                <h1 class="h2">Cliente</h1>
+                <strong>Cliente</strong>
+            </div>
+            <div class="col-xs-6">
+                <h1 class="h2">Remitente</h1>
+                <strong>Polos Luciana</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-condensed table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Precio unitario</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detallesProductos">
+                        <!-- Aquí se agregarán los detalles de los productos seleccionados -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">Subtotal</td>
+                            <td id="subtotal"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Descuento</td>
+                            <td id="descuento"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Subtotal con descuento</td>
+                            <td id="subtotalConDescuento"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Impuestos</td>
+                            <td id="impuestos"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">
+                                <h4>Total</h4>
+                            </td>
+                            <td>
+                                <h4 id="total"></h4>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1 class="h6 custom-heading" style="font-size: 32px;">Gracias por su compra</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Recuperar los detalles de los productos seleccionados del almacenamiento local
+            const productosSeleccionados = JSON.parse(localStorage.getItem('productosSeleccionados'));
+
+            // Verificar si hay productos seleccionados
+            if (productosSeleccionados && productosSeleccionados.length > 0) {
+                // Obtener el cuerpo de la tabla
+                const detallesProductos = document.getElementById('detallesProductos');
+
+                // Calcular y mostrar los detalles de los productos seleccionados en la tabla
+                productosSeleccionados.forEach(productoId => {
+                    const producto = baseDeDatos.find(item => item.id === parseInt(productoId));
+                    const precioTotal = producto.precio; // Suponiendo que no hay descuentos ni impuestos por ahora
+                    const fila = `
+                        <tr>
+                            <td>${producto.nombre}</td>
+                            <td>1</td>
+                            <td>${producto.precio}</td>
+                            <td>${precioTotal}</td>
+                        </tr>
+                    `;
+                    detallesProductos.innerHTML += fila;
+                });
+
+                // Calcular y mostrar el subtotal
+                const subtotal = productosSeleccionados.reduce((total, productId) => {
+                    const producto = baseDeDatos.find(item => item.id === parseInt(productId));
+                    return total + producto.precio;
+                }, 0);
+                document.getElementById('subtotal').textContent = subtotal;
+
+                // Resto de cálculos de precios y detalles de la factura
+                // Puedes agregarlos aquí si es necesario
+        } else {
+                // Si no hay productos seleccionados, mostrar un mensaje de error o redirigir a la página principal, según corresponda
+                console.error('No hay productos seleccionados.');
+            }
+        });
+        
+            // Obtener la fecha actual
+            var fecha = new Date();
+
+            // Formatear la fecha como "YYYY-MM-DD"
+            var fechaFormateada = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+
+            // Insertar la fecha formateada en el elemento con el id "fechaActual"
+            document.getElementById("fechaActual").textContent = fechaFormateada;
+
+    </script>
+</body>
+
